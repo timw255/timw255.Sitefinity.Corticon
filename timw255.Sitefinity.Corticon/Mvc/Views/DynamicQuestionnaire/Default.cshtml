@@ -1,0 +1,76 @@
+﻿@model timw255.Sitefinity.Corticon.Mvc.Models.DynamicQuestionnaireModel
+
+@using Telerik.Sitefinity.Frontend.Mvc.Helpers;
+@using Telerik.Sitefinity.Modules.Pages;
+
+@Html.Script(ScriptRef.JQuery, "head", false)
+@Html.Script("/Frontend-Assembly/timw255.Sitefinity.Corticon/Resources/validator.min.js", "head")
+@Html.Script("/Frontend-Assembly/timw255.Sitefinity.Corticon/Resources/kendo.all.min.js", "head")
+
+@Html.Script("/Frontend-Assembly/timw255.Sitefinity.Corticon/Resources/dynamicQuestionnaire.js", "bottom")
+
+<script>
+    var dqConfig = @Html.Raw(Model.DQConfiguration);
+</script>
+
+<!-- Info Content  - parallax - services Big Title -->
+<div class="parallax-window">
+    <!-- Content Parallax-->
+    <section class="opacy_bg_02 paddings">
+        <div class="container">
+            <div id="dynamic-questionnaire" class="row">
+                <div class="col-md-5">
+                    <!-- Title - Subtitle  -->
+                    <div class="title-subtitle">
+                        <h5>Answer a few easy questions to</h5>
+                        <h3>Apply Online.</h3>
+                    </div>
+                    <!-- End Title - Subtitle  -->
+
+                    <div class="form-theme full-form">
+                        <div class="row">
+                            <div class="col-sm-12" data-bind="visible: showQuestions">
+                                <div>
+                                    <div id="group" data-template="questions-template" data-bind="source: currentQuestions" role="form"></div>
+                                    <button id="back" class="btn btn-primary" data-bind="visible: showBack">Back</button>
+                                    <button id="next" class="btn btn-primary">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <!-- boxes-services-02-->
+                    <div class="row">
+                        <div class="results col-sm-12" data-bind="visibleWithFadeIn: showResults">
+                            <div data-template="results-template" data-bind="source: currentResults"></div>
+                            <button class="btn btn-link reset pull-right">Start Over</button>
+                        </div>
+                        <div class="results-placeholder col-sm-12" data-bind="invisible: showResults">
+                            <img src="@Url.Content("~/ResourcePackages/QBank/assets/dist/images/moving-in_r.jpg")" class="img-responsive" alt="" />
+                        </div>
+                    </div>
+                    <!-- End boxes-services-02-->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Content Parallax-->
+</div>
+<!-- End Info Content  - parallax - services Big Title -->
+
+<script id="questions-template" type="text/x-kendo-template">
+    <div class="form-group">
+        <label data-bind="attr: { for: field.name }, text: text"></label>
+        #if (get("field.type") != "select") {#
+        <input class="form-control" data-bind="attr: { type: field.type, id: field.name, name: field.name }, value: answer" # if (get("field.required")) {# required #} # />
+        #}else{#
+        <select class="form-control" data-bind="attr: { id: field.name, name: field.name }, source: field.options, value: answer" />
+        #}#
+    </div>
+</script>
+
+<script id="results-template" type="text/x-kendo-template">
+    @Html.Raw(Model.ContentTemplate)
+</script>

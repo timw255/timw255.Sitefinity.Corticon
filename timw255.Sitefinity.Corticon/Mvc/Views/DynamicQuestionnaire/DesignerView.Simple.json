@@ -1,0 +1,7 @@
+﻿{
+    "priority": 1,
+    "components": ["sf-form-field", "sf-page-selector", "sf-expander", "sf-style-dropdown"],
+    "scripts": [ 
+        "Mvc/Scripts/dynamicQuestionnaireDesigner.js"
+    ]
+}

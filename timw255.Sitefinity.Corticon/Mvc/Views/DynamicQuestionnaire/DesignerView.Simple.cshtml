@@ -1,0 +1,93 @@
+﻿@using Telerik.Sitefinity.Frontend.Mvc.Helpers;
+@using Telerik.Sitefinity.Mvc;
+@using System.Web.Mvc.Html;
+@using timw255.Sitefinity.Corticon;
+
+<uib-tabset class="nav-tabs-wrapper">
+    <uib-tab heading="Corticon">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-8">
+                    <label>Service Endpoint</label>
+                    <div class="input-group">
+                        <input id="CorticonServiceEndpoint" ng-model="properties.CorticonServiceEndpoint.PropertyValue" class="form-control" type="text" />
+                        <span class="input-group-btn">
+                            <button ng-click="getDecisionServiceNames()" type="button" class="btn btn-info">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="serviceNames.length">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <label>Service Name</label>
+                        <select class="form-control" id="CorticonServiceName" ng-model="properties.CorticonServiceName.PropertyValue" ng-options="option as option for option in serviceNames"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <label>Service Major Version</label>
+                        <input id="CorticonServiceMajorVersion" ng-model="properties.CorticonServiceMajorVersion.PropertyValue" class="form-control" type="text" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <label>Service Minor Version</label>
+                        <input id="CorticonServiceMinorVersion" ng-model="properties.CorticonServiceMinorVersion.PropertyValue" class="form-control" type="text" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </uib-tab>
+
+    <uib-tab heading="Sitefinity">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-10">
+                    <label>Content Source Endpoint</label>
+                    <input ng-model="properties.ContentSourceEndpoint.PropertyValue" class="form-control" type="text" />
+                    <p class="text-muted"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-6">
+                    <label>Identifier</label>
+                    <input ng-model="properties.ContentIdentifier.PropertyValue" class="form-control" type="text" />
+                    <p class="text-muted">The Sitefinity content field that can be used to identify the recommendations from Corticon.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12">
+                    <label>Recommendation Template</label>
+                    <textarea ng-model="properties.ContentTemplate.PropertyValue" class="form-control" rows="15"></textarea>
+                    <p class="text-muted"></p>
+                </div>
+            </div>
+        </div>
+    </uib-tab>
+
+    <uib-tab heading="Apply Online">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-10">
+                    <label>Apply Online Page</label>
+                    <div class="label-content">
+                        <sf-list-selector sf-page-selector sf-selected-item-id="properties.ApplyOnlinePageId.PropertyValue"></sf-list-selector>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </uib-tab>
+</uib-tabset>
